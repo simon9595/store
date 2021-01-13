@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Orinoco</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <script src="test.js"></script>
+    </head>
+
+    <body>
+        <header class="bg-dark">
+            <div class="container">
+                <div class="row">    
+                    <nav class="navbar navbar-expand navbar-dark bg-dark">
+                        <a class="navbar-brand" href="index.html">Orinoco</a>
+                        <ul class="navbar-nav"> 
+                            <li class="navitem active">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="checkout.html">Checkout</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <div class="jumbotron">
+                <h1>Browse our products</h1>
+            </div>
+
+            <!-- Idk if this is supposed to be here or
+            if I'm supposed to put it when you order
+            the teddies, maybe both? -->
+            
+            <form action="/test.js">
+                <label for="teddys">Sort by color:</label>
+                <select id="teddys" name="teddys">
+                  <option value="place">place</option>
+                  <option value="holder">holder</option>
+                  <option value="value">value</option>
+                  <option value="sample text">Sample text</option>
+                </select>
+                <input type="submit">
+            </form>
+
+            <section class="row">
+                <div class="col-12 col-lg-4">
+                    <img src="img/placeholder.jpg" height="200px" width="250px"> <!-- Product image-->
+                    <h2><a href="#">Item Name</a></h2>
+                    <p>Add to cart</p>
+                    <p>$20.00</p>
+                    <p>Item description goes here</p>
+                </div>
+             </section>
+        </main>
+
+        
+        <!-- Has whitespace below it, fix it or get rid of it. -->
+        <footer class="bg-dark">
+            <div class="bg-dark container text-light">
+                <p>Sample text, test for Aesthetic purposes only</p>
+            </div>
+        </footer>
+        
+    </body>
+</html>

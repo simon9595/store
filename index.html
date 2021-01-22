@@ -28,54 +28,37 @@
             </div>
         </header>
 
-        <main class="container">
-            <div class="jumbotron">
-                <h1>Browse our products</h1>
-            </div>
-
-            <!-- Idk if this is supposed to be here or
-            if I'm supposed to put it when you order
-            the teddies, maybe both? -->
-            
-            <form action="/test.js">
-                <label for="teddys">Sort by color:</label>
-                <select id="teddys" name="teddys">
-                  <option value="place">place</option>
-                  <option value="holder">holder</option>
-                  <option value="value">value</option>
-                  <option value="sample text">Sample text</option>
-                </select>
-                <input type="submit">
-            </form>
-
-            <div>    
-                <section class="row products">
-                        <section class="card col-12 col-lg-3 mx-3">
-                                <article class="card-body" id="item">
-                                    <img class="card-img-top product-image" src="img/placeholder.jpg" class="product-image"> <!-- Product image-->
-                                    <h2 class="product-name"><a class="product-link" href="#">Item Name</a></h2>
-                                    <p class="add-to-cart">Add to cart</p>
-                                    <p class="price">$20.00</p>
-                                    <p class="item-description">Item description goes here</p>
-                                </article>
-                        </section>
-                                
-                        <section class="card col-12 col-lg-3">
-                            <article class="card-body" id="item">
-                                <img class="card-img-top product-image" src="img/placeholder.jpg" class="product-image"> <!-- Product image-->
-                                <h2 class="product-name"><a class="product-link" href="#">Item Name</a></h2>
-                                <p class="add-to-cart">Add to cart</p>
-                                <p class="price">$20.00</p>
-                                <p class="item-description">Item description goes here</p>
-                            </article>
-
-                            
-                        </section>
-
-                        
+        <div class="jumbotron container">
+            <h1>Browse our products</h1>
+        </div>
+        
+        <main class="container card-columns">
+            <section class="card">
+                <img class="card-img-top img-fluid" src="img/placeholder.jpg" alt="Placeholder image">
+                    <div class="card-body">
+                        <h4 class="card-title">Item name</h4>
+                        <p class="card-text">$00.00</p>
+                        <p class="card-text">Item description</p>
                     </div>
-                </section>
-            </div>
+            </section>
+
+            <section class="card">
+                <img class="card-img-top img-fluid" src="img/placeholder.jpg" alt="Placeholder image">
+                    <div class="card-body">
+                        <h4 class="card-title">Item name</h4>
+                        <p class="card-text">$00.00</p>
+                        <p class="card-text">Item description</p>
+                    </div>
+            </section>
+
+            <section class="card">
+                <img class="card-img-top img-fluid" src="img/placeholder.jpg" alt="Placeholder image">
+                    <div class="card-body">
+                        <h4 class="card-title">Item name</h4>
+                        <p class="card-text">$00.00</p>
+                        <p class="card-text">Item description</p>
+                    </div>
+            </section>
         </main>
 
         

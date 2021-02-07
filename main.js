@@ -56,11 +56,45 @@ async function showAllItems() {
     });
 }
 
+function getOneItem() {
+    let id = location.search.substring(4);
+    console.log(id);
+    fetch('http://localhost:3000/api/teddies/' + id)
+    .then(response => {
+        console.log(response.json);
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        let itemImage = document.getElementById('item-image');
+        itemImage.setAttribute('src', data.imageUrl);
+        itemImage.setAttribute('alt', 'Orinoco teddy bears ' + data.name);
+
+        let itemName = document.getElementById('item-name');
+        itemName.textContent = data.name;
+
+        let itemCost = document.getElementById('item-price');
+        itemCost.textContent = '$' + data.price/100;
+
+        let itemDescription = document.getElementById('description');
+        itemDescription.textContent = data.description;
+
+
+
+        data.colors.forEach((color) => {
+            let itemColor = document.getElementById('color-selection');
+            let newColor = document.createElement('option');
+            newColor.setAttribute('value', color);
+            newColor.textContent = color;
+            itemColor.appendChild(newColor);
+        });
+
+    })
+    .catch(error => console.log('Request failed', error));
+}
 // const product = document.getElementsByClassName('product');
 
 // product.addEventListener('click', () => {
-
-// async. programming ^
 
 // });
 

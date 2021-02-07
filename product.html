@@ -8,7 +8,7 @@
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-        <script src="test.js"></script>
+        <script src="main.js"></script>
     </head>
 
     <body>
@@ -36,26 +36,26 @@
                 <div class="row g-0">
                   <div class="col-md-6">
                     <img
-                      src="img/placeholder.jpg"
-                      alt="placeholder image"
+                      src=""
+                      alt=""
                       class="img-fluid"
+                      id="item-image"
                     />
                   </div>
                   <div class="col-md-6">
                     <div class="card-body">
-                      <h1 class="card-title">Item name</h1>
-                        <p class="card-text">Cost</p>
+                      <h1 class="card-title" id="item-name"></h1>
+                        <p class="card-text" id="item-price">Cost</p>
                             <label for="color-selection">Colors:</label>
                             <select name="colors" id="color-selection">
-                                <option value="">--Please choose an option--</option>
-                                <option value="1">Color 1</option>
-                                <option value="2">Color 2</option>
-                                <option value="3">Color 3</option>
                             </select>
-                        <p class="card-text">Description</p>
-                        <btn class="btn btn-primary">Add to cart</btn>
+                        <p class="card-text" id="description">Description</p>
+                        <btn class="btn btn-primary" id="add-to-cart">Add to cart</btn>
                     </div>
                   </div>
+                  <script>
+                      getOneItem();
+                  </script>
 
         </main>
 

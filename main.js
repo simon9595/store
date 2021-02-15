@@ -1,4 +1,3 @@
-
 function getAllItems(){
     return new Promise((resolve) => {
         let apiRequest = new XMLHttpRequest();
@@ -40,7 +39,7 @@ async function showAllItems() {
 
         let itemView = document.createElement('a');
         itemView.classList.add('btn', 'btn-primary', 'product')
-        itemView.setAttribute('href', 'product.html?id=' + item._id); //??
+        itemView.setAttribute('href', 'product.html?id=' + item._id);
         itemView.textContent = 'View item';
 
         itemCard.appendChild(itemName);
@@ -55,31 +54,28 @@ async function showAllItems() {
 
     });
 }
+let itemName = document.getElementById('item-name');
+let itemCost = document.getElementById('item-price');
 
 function getOneItem() {
     let id = location.search.substring(4);
-    console.log(id);
+    // console.log(id);
     fetch('http://localhost:3000/api/teddies/' + id)
     .then(response => {
-        console.log(response.json);
+        // console.log(response.json);
         return response.json();
     })
     .then(data => {
-        console.log(data);
+        // console.log(data);
         let itemImage = document.getElementById('item-image');
         itemImage.setAttribute('src', data.imageUrl);
         itemImage.setAttribute('alt', 'Orinoco teddy bears ' + data.name);
 
-        let itemName = document.getElementById('item-name');
         itemName.textContent = data.name;
-
-        let itemCost = document.getElementById('item-price');
         itemCost.textContent = '$' + data.price/100;
 
         let itemDescription = document.getElementById('description');
         itemDescription.textContent = data.description;
-
-
 
         data.colors.forEach((color) => {
             let itemColor = document.getElementById('color-selection');
@@ -92,6 +88,49 @@ function getOneItem() {
     })
     .catch(error => console.log('Request failed', error));
 }
+
+const totalCount = document.getElementsByClassName('total-count');
+cart = window.localStorage;
+let displayCount = 0;
+let totalItems = 0;
+totalCount.textContent = totalItems;
+
+function addToCart() {
+    let addToCart = document.getElementById('add-to-cart');
+    addToCart.addEventListener('click', function() {
+        console.log('ding')
+
+        if(displayCount < 1) {
+            const main = document.querySelector('main');
+            let notify = document.createElement('p');
+            notify.textContent = 'Item has been added to your cart!';
+            notify.classList.add('bg-success', 'p-2');
+            main.prepend(notify);
+            displayCount++
+        }
+
+        const id = location.search.substring(4);
+        console.log(id);
+
+        let color = document.getElementById('color-selection');
+
+        let colorSelection = color.value;
+        console.log(colorSelection);
+
+        const order = {
+            id: id,
+            name : itemName.textContent,
+            cost: itemCost.textContent,
+            color: colorSelection
+        };
+
+        localStorage.setItem('why doesn\'t this work', JSON.stringify(order)); // fix this so multiples
+        // of the same item can be added ffs
+    });
+}
+
+console.log(cart);
+
 // const product = document.getElementsByClassName('product');
 
 // product.addEventListener('click', () => {

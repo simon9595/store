@@ -92,8 +92,7 @@ function getOneItem() {
 const totalCount = document.getElementsByClassName('total-count');
 cart = window.localStorage;
 let displayCount = 0;
-let totalItems = 0;
-totalCount.textContent = totalItems;
+cartItem = [];
 
 function addToCart() {
     let addToCart = document.getElementById('add-to-cart');
@@ -108,7 +107,6 @@ function addToCart() {
             main.prepend(notify);
             displayCount++
         }
-
         const id = location.search.substring(4);
         console.log(id);
 
@@ -119,23 +117,66 @@ function addToCart() {
 
         const order = {
             id: id,
-            name : itemName.textContent,
+            name: itemName.textContent,
             cost: itemCost.textContent,
             color: colorSelection
         };
+        console.log(order);
 
-        localStorage.setItem('why doesn\'t this work', JSON.stringify(order)); // fix this so multiples
-        // of the same item can be added ffs
+        let orderString = JSON.stringify(order);
+
+        cartItem.push(orderString)
+
+        cart.setItem(cart.length++, cartItem);
+
+        window.location.replace('./checkout.html')
     });
-}
+};
 
-console.log(cart);
+function displayCart() {
 
-// const product = document.getElementsByClassName('product');
+    if(cart.length === 0) {
+        const main = document.querySelector('main');
+        let emptyCart = document.createElement('p');
+        emptyCart.textContent = 'Your shopping cart is currently empty.';
+        emptyCart.classList.add('bg-warning', 'p-2');
+        main.prepend(emptyCart);
+    }  else {
+        console.log(cart);
+        for(let i = 0; i < cart.length; i++) {
+            let item = JSON.parse(cart[i]);
+            console.log(item);
+            console.log(item.name)
 
-// product.addEventListener('click', () => {
+            let cartItem = document.createElement('div');
+            cartItem.classList.add('d-flex', 'justify-content-between', 'pb-1');
 
-// });
+            let itemName = document.createElement('p');
+            itemName.textContent = item.name;
+            itemName.classList.add('col-3')
 
-// maybe store the ID of a product as a variable and have a
-// request with the ID attached
+            let itemPrice = document.createElement('p');
+            itemPrice.textContent = item.cost;
+            itemPrice.classList.add('col-3')
+
+            let itemColor = document.createElement('p');
+            itemColor.textContent = item.color;
+            itemColor.classList.add('col-3')
+
+            let deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Remove';
+            deleteButton.classList.add('btn', 'btn-danger', 'col-3');
+
+
+
+            cartItem.appendChild(itemName);
+            cartItem.appendChild(itemPrice);
+            cartItem.appendChild(itemColor);
+            cartItem.appendChild(deleteButton);
+
+            const checkout = document.getElementById('cart');
+            checkout.appendChild(cartItem);
+
+        }
+    }
+};

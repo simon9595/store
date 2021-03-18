@@ -118,7 +118,7 @@ function addToCart() {
         const order = {
             id: id,
             name: itemName.textContent,
-            cost: itemCost.textContent,
+            cost: itemCost.textContent.replace('$', ''),
             color: colorSelection
         };
         console.log(order);
@@ -142,11 +142,11 @@ function displayCart() {
         emptyCart.classList.add('bg-warning', 'p-2');
         main.prepend(emptyCart);
     }  else {
-        console.log(cart);
+        // console.log(cart);
         for(let i = 0; i < cart.length; i++) {
             let item = JSON.parse(cart[i]);
-            console.log(item);
-            console.log(item.name)
+            // console.log(item);
+            // console.log(item.name)
 
             let cartItem = document.createElement('div');
             cartItem.classList.add('d-flex', 'justify-content-between', 'pb-1');
@@ -156,8 +156,8 @@ function displayCart() {
             itemName.classList.add('col-3')
 
             let itemPrice = document.createElement('p');
-            itemPrice.textContent = item.cost;
-            itemPrice.classList.add('col-3')
+            itemPrice.textContent = '$' + item.cost;
+            itemPrice.classList.add('col-3', 'price');
 
             let itemColor = document.createElement('p');
             itemColor.textContent = item.color;
@@ -170,13 +170,54 @@ function displayCart() {
 
 
             cartItem.appendChild(itemName);
-            cartItem.appendChild(itemPrice);
             cartItem.appendChild(itemColor);
+            cartItem.appendChild(itemPrice);
             cartItem.appendChild(deleteButton);
 
             const checkout = document.getElementById('cart');
             checkout.appendChild(cartItem);
 
         }
+
     }
+};
+
+function cartTotal() {
+    let totalAlt = 0;
+    for(let i = 0; i < cart.length; i++) {
+        let item = JSON.parse(cart[i]);
+        let cost = parseInt(item.cost);
+
+        totalAlt = totalAlt + cost;
+    }
+    let totalCost = document.getElementById('total-cost');
+    totalCost.textContent = 'Total: ' + '$' + totalAlt;
+}
+
+function placeOrder() {
+    // if cart.length is 1 item or more
+    let orderButton = document.getElementById('place-order');
+    orderButton.addEventListener('click', function() {
+        console.log('ding');
+        let orderIds = [];
+        let contactDeets = {
+            firstName: document.getElementById('first-name').value,
+            lastName: document.getElementById('last-name').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            email: document.getElementById('email').value
+        }
+        for(let i = 0; i < cart.length; i++) {
+            let item = JSON.parse(cart[i]);
+            orderIds.push(item.id);
+        }
+        console.log(orderIds);
+
+        let order = {
+            contactDeets,
+            orderIds
+        };
+        console.log(order);
+        
+    });
 };

@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <title>Orinoco - Checkout</title>
+        <link rel="icon" type="image/ico" href="favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
@@ -45,6 +46,11 @@
                         <p class="col-3">Price</p>
                         <p class="col-3">Remove</button>                    </div>
                     <hr>
+                    <script>
+                        displayCart();
+                    </script>
+                    <hr>
+                    <p class="d-flex flex-row-reverse" id="total-cost"></p>
                 </div>
                 
                 <div class="col-5">
@@ -67,16 +73,18 @@
                         </div>
                         <div>
                             <label>E-mail</label>
-                            <input type="email" required class="form-control" placeholder="YourEmail@address.com">
+                            <input type="email" required class="form-control" placeholder="YourEmail@address.com" id="email">
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4">Send!</button>
+                        <button type="submit" class="btn btn-primary mt-4" id="place-order">Send!</button>
                     </form>
         
                 </div>
             </div>
         </main>
         <script>
-            displayCart();
+            // displayCart();
+            cartTotal();
+            placeOrder()
         </script>
 
     </body>

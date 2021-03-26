@@ -189,35 +189,61 @@ function cartTotal() {
         let cost = parseInt(item.cost);
 
         totalAlt = totalAlt + cost;
-    }
+    };
     let totalCost = document.getElementById('total-cost');
-    totalCost.textContent = 'Total: ' + '$' + totalAlt;
-}
+    totalCost.textContent = '$' + totalAlt;
+};
 
 function placeOrder() {
+    document.getElementById('place-order').addEventListener("click", function(event){
+        event.preventDefault()
+      });
     // if cart.length is 1 item or more
-    let orderButton = document.getElementById('place-order');
-    orderButton.addEventListener('click', function() {
-        console.log('ding');
-        let orderIds = [];
-        let contactDeets = {
-            firstName: document.getElementById('first-name').value,
-            lastName: document.getElementById('last-name').value,
-            address: document.getElementById('address').value,
-            city: document.getElementById('city').value,
-            email: document.getElementById('email').value
-        }
-        for(let i = 0; i < cart.length; i++) {
-            let item = JSON.parse(cart[i]);
-            orderIds.push(item.id);
-        }
-        console.log(orderIds);
-
-        let order = {
-            contactDeets,
-            orderIds
-        };
-        console.log(order);
-        
-    });
+    if(cart.length >= 1) {
+        let orderButton = document.getElementById('place-order');
+        orderButton.addEventListener('click', function() {
+            console.log('ding');
+            let products = [];
+            let contact = {
+                firstName: document.getElementById('first-name').value,
+                lastName: document.getElementById('last-name').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                email: document.getElementById('email').value
+            }
+            for(let i = 0; i < cart.length; i++) {
+                let item = JSON.parse(cart[i]);
+                products.push(item.id);
+            }
+            // console.log(orderIds);
+    
+            let order = {
+                contact,
+                products
+            };
+            console.log(order);
+            let orderStr = JSON.stringify(order);
+    
+            let orderRequest = new XMLHttpRequest();
+            orderRequest.open('POST', 'http://localhost:3000/api/teddies/order');
+            orderRequest.setRequestHeader("Content-Type", "application/json");
+            orderRequest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 201) {
+                    let response = this.responseText;
+                    console.log(response);
+                } //else statement here
+            }
+            orderRequest.send(orderStr);
+            
+        });
+    } else {
+        let orderButton = document.getElementById('place-order');
+        orderButton.addEventListener('click', function() {
+        const main = document.querySelector('main');
+        let emptyCart = document.createElement('p');
+        emptyCart.textContent = 'You cannot place an empty order.';
+        emptyCart.classList.add('bg-danger', 'p-2');
+        main.prepend(emptyCart);
+        });
+    };
 };

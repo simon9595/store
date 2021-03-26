@@ -192,13 +192,13 @@ function cartTotal() {
     };
     let totalCost = document.getElementById('total-cost');
     totalCost.textContent = '$' + totalAlt;
+    sessionStorage.setItem('total', totalAlt);
 };
 
 function placeOrder() {
     document.getElementById('place-order').addEventListener("click", function(event){
         event.preventDefault()
       });
-    // if cart.length is 1 item or more
     if(cart.length >= 1) {
         let orderButton = document.getElementById('place-order');
         orderButton.addEventListener('click', function() {
@@ -231,10 +231,11 @@ function placeOrder() {
                 if (this.readyState == 4 && this.status == 201) {
                     let response = this.responseText;
                     console.log(response);
+                    sessionStorage.setItem('order', response);
+                    window.location.replace('./complete.html');
                 } //else statement here
             }
             orderRequest.send(orderStr);
-            
         });
     } else {
         let orderButton = document.getElementById('place-order');
@@ -246,4 +247,17 @@ function placeOrder() {
         main.prepend(emptyCart);
         });
     };
+};
+
+function thankYou() {
+    let orderDetails = JSON.parse(sessionStorage.order);
+
+    let nameField = document.getElementById('name');
+    let orderIdField = document.getElementById('order-id');
+
+    let firstName = orderDetails.contact.firstName;
+    let orderId = orderDetails.orderId;
+
+    nameField.textContent = firstName + '!';
+    orderIdField.textContent = orderId;
 };

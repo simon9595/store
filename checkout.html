@@ -55,7 +55,7 @@
                 </div>
                 
                 <div class="col-12 col-md-5">
-                    <form>
+                    <form id="contact-form">
                         <div class="form-group">
                             <label for="first-name">First name</label>
                             <input type="text" required class="form-control" placeholder="First name" id="first-name">
@@ -74,7 +74,7 @@
                         </div>
                         <div>
                             <label>E-mail</label>
-                            <input type="email" required class="form-control" placeholder="YourEmail@address.com" id="email">
+                            <input type="email" required class="form-control" placeholder="YourEmail@address.com" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                         </div>
                         <button type="submit" class="btn btn-primary mt-4" id="place-order">Send!</button>
                     </form>

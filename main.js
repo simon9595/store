@@ -196,12 +196,18 @@ function cartTotal() {
 };
 
 function placeOrder() {
-    document.getElementById('place-order').addEventListener("click", function(event){
+    // make it submit only if the form is valid
+    // event listener for invalid event
+    let form = document.getElementById('contact-form');
+    
+
+    document.getElementById('place-order').addEventListener('click', function(event){
         event.preventDefault()
       });
     if(cart.length >= 1) {
         let orderButton = document.getElementById('place-order');
         orderButton.addEventListener('click', function() {
+            if (form.checkValidity()) {
             console.log('ding');
             let products = [];
             let contact = {
@@ -236,6 +242,7 @@ function placeOrder() {
                 } //else statement here
             }
             orderRequest.send(orderStr);
+        }
         });
     } else {
         let orderButton = document.getElementById('place-order');
